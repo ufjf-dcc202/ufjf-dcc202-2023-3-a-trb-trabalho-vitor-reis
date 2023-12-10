@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <script src="main.js"></script>
     <title>Esbugalhado</title>
 </head>
 <body>
@@ -12,63 +13,48 @@
         <h2>Jogador 1</h2>
 
         <div class="game-board" id="tabuleiroJogador1">
-            <table border="1px">
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    
-            </table>
+            <ul class="player-list" id="player1List1">
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+            <ul class="player-list" id="player1List2">
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+            <ul class="player-list" id="player1List3">
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
         </div>
     </div>
 
     <div id="player2" class="player">
         <h2>Jogador 2</h2>
         <div class="game-board" id="tabuleiroJogador2">
-            <table border="1px">
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-            </table>
+            <ul class="player-list" id="player2List1">
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+            <ul class="player-list" id="player2List2">
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+            <ul class="player-list" id="player2List3">
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
         </div>
     </div>
 
-    <button id="rollDiceBtn" onclick="rollDice()">Rolar Dado</button>
-    <script src="main.js"></script>
+    <button id="rollDiceBtn" onclick="rolarDado()">Rolar Dado</button>
 
-    
+    <div id="resultadoDado"></div> 
+
 </body>
 </html>
