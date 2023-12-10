@@ -1,7 +1,7 @@
 // Variável para controlar o jogador atual
 let jogadorAtual = 1;
 
-// Listas dos jogadores
+// Lista dos jogadores
 const listasJogador1 = [
     document.getElementById('player1List1'),
     document.getElementById('player1List2'),
@@ -14,46 +14,106 @@ const listasJogador2 = [
     document.getElementById('player2List3')
 ];
 
-// Função para rolar o dado
-function rolarDado() {
+// Variável para controlar se o jogador pode clicar
+let podeClicar = true;
 
-    console.log(`Jogador Atual: ${jogadorAtual}`);
+// Função para adicionar eventos de clique aos quadrados
+function adicionarEventoClique() {
+    document.querySelectorAll('.player-list li').forEach(square => {
+        square.addEventListener('click', () => {
+            // Verifica se o quadrado está vazio e se já foi preenchido
+            if (square.textContent === '' && !square.classList.contains('filled') && podeClicar) {
+                // Atribui o valor do dado ao quadrado clicado
+                square.textContent = document.getElementById(`resultadoDado${jogadorAtual}`).textContent.split(' ')[3];
 
-    // Lógica para gerar um número aleatório de 1 a 6 (representando o dado)
-    const valorDado = Math.floor(Math.random() * 6) + 1;
+                // Adiciona a classe 'filled' para indicar que o quadrado foi preenchido
+                square.classList.add('filled');
 
-    // Exibe o resultado do dado no elemento HTML
-    const resultadoDadoElement = jogadorAtual === 1 ? document.getElementById('resultadoDado1') : document.getElementById('resultadoDado2');
-    resultadoDadoElement.textContent = `Resultado do Dado: ${valorDado}`;
-
-    // Lógica para decidir em qual lista colocar o valor do dado
-    const listasJogadorAtual = jogadorAtual === 1 ? listasJogador1 : listasJogador2;
-
-    // Lógica para encontrar a primeira célula vazia e atribuir o valor do dado
-    for (let i = 0; i < 3; i++) {
-        const itensLista = listasJogadorAtual[i].getElementsByTagName('li');
-        for (let j = 0; j < 3; j++) {
-            if (itensLista[j].textContent === '') {
-                itensLista[j].textContent = valorDado;
+                // Troca de jogador
                 trocarJogador();
-                console.log(`Valor Dado: ${valorDado}`);
-
-                return;
             }
-        }
+        });
+    });
+}
+
+// Função para rolar o dado do jogador 1
+function rolarDado() {
+    // Verifica se o jogador pode clicar
+    if (podeClicar && jogadorAtual === 1) {
+        // Lógica para gerar um número aleatório de 1 a 6 (representando o dado)
+        const valorDado = Math.floor(Math.random() * 6) + 1;
+
+        // Exibe o resultado do dado no elemento HTML
+        const resultadoDadoElement = document.getElementById(`resultadoDado${jogadorAtual}`);
+        resultadoDadoElement.textContent = `Resultado do Dado: ${valorDado}`;
+
+        // Aguarda um segundo antes de impedir que o jogador 1 clique novamente
+        setTimeout(() => {
+            // Remove os eventos de clique
+            document.querySelectorAll('.player-list li').forEach(square => {
+                square.removeEventListener('click', () => {});
+            });
+
+            // Troca de jogador
+            trocarJogador();
+
+            // Permite que o jogador 1 clique novamente
+            podeClicar = true;
+
+            // Adiciona os eventos de clique novamente
+            adicionarEventoClique();
+        }, 1000);
     }
 }
 
 // Função para trocar o jogador
 function trocarJogador() {
-    console.log('Trocar Jogador');
-
     jogadorAtual = jogadorAtual === 1 ? 2 : 1;
 
     // Se o jogador atual for 2, rolar dados automaticamente
     if (jogadorAtual === 2) {
         setTimeout(() => {
-            rolarDado();
-        }, 1000); 
+            // Após rolar o dado, impede que o jogador 1 clique
+            podeClicar = false;
+            // Remove os eventos de clique
+            document.querySelectorAll('.player-list li').forEach(square => {
+                square.removeEventListener('click', () => {});
+            });
+            rolarDadoJogador2();
+        }, 1000);
     }
 }
+
+// Função para rolar o dado do jogador 2
+function rolarDadoJogador2() {
+    // Lógica para gerar um número aleatório de 1 a 6 (representando o dado)
+    const valorDado = Math.floor(Math.random() * 6) + 1;
+
+    // Exibe o resultado do dado no elemento HTML
+    const resultadoDadoElement = document.getElementById('resultadoDado2');
+    resultadoDadoElement.textContent = `Resultado do Dado: ${valorDado}`;
+
+    // Lógica para decidir em qual lista colocar o valor do dado (posição aleatória)
+    const listaJogador2Aleatoria = listasJogador2[Math.floor(Math.random() * 3)];
+    const itensLista = listaJogador2Aleatoria.getElementsByTagName('li');
+
+    // Encontrar a primeira célula vazia e atribuir o valor do dado
+    for (let j = 0; j < 3; j++) {
+        if (itensLista[j].textContent === '') {
+            // Atribui o valor do dado à célula vazia
+            itensLista[j].textContent = valorDado;
+            break; // Interrompe o loop após encontrar a primeira célula vazia
+        }
+    }
+
+    // Aguarde um segundo antes de permitir que o jogador 1 clique novamente
+    setTimeout(() => {
+        // Permite que o jogador 1 clique novamente
+        podeClicar = true;
+        //
+        adicionarEventoClique();
+    }, 1000);
+}
+
+// Adiciona os eventos de clique aos quadrados inicialmente
+adicionarEventoClique();
