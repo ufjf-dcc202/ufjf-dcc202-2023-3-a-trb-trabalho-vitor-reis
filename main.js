@@ -1,56 +1,59 @@
-
 // Variável para controlar o jogador atual
-let currentPlayer = 1;
+let jogadorAtual = 1;
 
-// Tabuleiros dos jogadores
-const player1Board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
-const player2Board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
+// Listas dos jogadores
+const listasJogador1 = [
+    document.getElementById('player1List1'),
+    document.getElementById('player1List2'),
+    document.getElementById('player1List3')
+];
+
+const listasJogador2 = [
+    document.getElementById('player2List1'),
+    document.getElementById('player2List2'),
+    document.getElementById('player2List3')
+];
 
 // Função para rolar o dado
-function rollDice() {
-    // Lógica para gerar um número aleatório de 1 a 6 (representando o dado)
-    const diceValue = Math.floor(Math.random() * 6) + 1;
+function rolarDado() {
 
-    // Lógica para decidir em qual tabuleiro colocar o valor do dado
-    const currentPlayerBoard = currentPlayer === 1 ? player1Board : player2Board;
+    console.log(`Jogador Atual: ${jogadorAtual}`);
+
+    // Lógica para gerar um número aleatório de 1 a 6 (representando o dado)
+    const valorDado = Math.floor(Math.random() * 6) + 1;
+
+    // Exibe o resultado do dado no elemento HTML
+    const resultadoDadoElement = document.getElementById('resultadoDado');
+    resultadoDadoElement.textContent = `Resultado do Dado: ${valorDado}`;
+
+    // Lógica para decidir em qual lista colocar o valor do dado
+    const listasJogadorAtual = jogadorAtual === 1 ? listasJogador1 : listasJogador2;
 
     // Lógica para encontrar a primeira célula vazia e atribuir o valor do dado
     for (let i = 0; i < 3; i++) {
+        const itensLista = listasJogadorAtual[i].getElementsByTagName('li');
         for (let j = 0; j < 3; j++) {
-            if (currentPlayerBoard[i][j] === 0) {
-                currentPlayerBoard[i][j] = diceValue;
-                updateGameBoard(currentPlayer, currentPlayerBoard);
-                switchPlayer();
+            if (itensLista[j].textContent === '') {
+                itensLista[j].textContent = valorDado;
+                trocarJogador();
+                console.log(`Valor Dado: ${valorDado}`);
+
                 return;
             }
         }
     }
 }
 
-// Função para atualizar o tabuleiro na página
-function updateGameBoard(player, board) {
-    const boardElement = document.getElementById(`tabuleiroJogador${player}`);
-    const cells = boardElement.getElementsByTagName('td');
-
-    // Preenche as células da tabela com os valores do tabuleiro
-    for (let i = 0; i < 3; i++) {
-        for (let j = 0; j < 3; j++) {
-            const cellIndex = i * 3 + j;
-            cells[cellIndex].textContent = board[i][j];
-        }
-    }
-}
-
 // Função para trocar o jogador
-function switchPlayer() {
-    currentPlayer = currentPlayer === 1 ? 2 : 1;
-    
+function trocarJogador() {
+    console.log('Trocar Jogador');
+
+    jogadorAtual = jogadorAtual === 1 ? 2 : 1;
+
     // Se o jogador atual for 2, rolar dados automaticamente
-    if (currentPlayer === 2) {
+    if (jogadorAtual === 2) {
         setTimeout(() => {
-            rollDice();
+            rolarDado();
         }, 1000); // Adicione um atraso opcional (1 segundo) para tornar a rolagem visível
     }
 }
-
-
