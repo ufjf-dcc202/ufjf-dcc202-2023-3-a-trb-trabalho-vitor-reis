@@ -5,10 +5,13 @@ body {
     justify-content: space-between;
     height: 100vh;
     margin: 0;
+    font-family: 'Arial', sans-serif;  
+    background-color: #f0f0f0; /
 }
 
 .player {
     text-align: center;
+    margin-bottom: 20px; /* Espaçamento entre os jogadores */
 }
 
 .game-board {
@@ -25,13 +28,20 @@ body {
 }
 
 .player-list li {
-    border: 1px solid;
+    border: 1px solid #ccc; /* Borda suave */
     width: 30px;
     height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 2px;
+    background-color: #fff; /* Fundo branco */
+    cursor: pointer; /* Altera o cursor */
+    transition: background-color 0.3s ease; /* Efeito de transição suave */
+}
+
+.player-list li:hover {
+    background-color: #e0e0e0; /* Cor de fundo quando passar o cursor em cima */
 }
 
 #tabuleiroJogador1 {
@@ -40,4 +50,19 @@ body {
 
 #tabuleiroJogador2 {
     align-self: flex-end;
+}
+
+#rollDiceBtn {
+    margin-top: 20px; /* Espaçamento acima do botão */
+    padding: 10px;
+    font-size: 16px;
+    background-color: #4CAF50; /* Cor de fundo verde */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#rollDiceBtn:hover {
+    background-color: #45a049; /* Cor de fundo mais escura ao passar o mouse */
 }
