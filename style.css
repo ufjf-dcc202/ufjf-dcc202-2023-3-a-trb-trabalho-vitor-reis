@@ -1,3 +1,4 @@
+/* Estilos gerais do corpo da página */
 body {
     display: flex;
     flex-direction: column;
@@ -5,15 +6,17 @@ body {
     justify-content: space-between;
     height: 100vh;
     margin: 0;
-    font-family: 'Arial', sans-serif;  
-    background-color: #f0f0f0; /
+    font-family: 'Arial', sans-serif; /* Fonte padrão para uma aparência limpa */
+    background-color: #f0f0f0; /* Cor de fundo suave */
 }
 
+/* Estilos para cada jogador */
 .player {
     text-align: center;
     margin-bottom: 20px; /* Espaçamento entre os jogadores */
 }
 
+/* Estilos do tabuleiro de jogo */
 .game-board {
     display: flex;
     flex-direction: column;
@@ -21,37 +24,43 @@ body {
     margin-top: 10px;
 }
 
+/* Estilos para as listas de jogadores */
 .player-list {
     list-style: none;
     padding: 0;
     display: flex;
 }
 
+/* Estilos para cada item da lista (quadrados) */
 .player-list li {
     border: 1px solid #ccc; /* Borda suave */
-    width: 30px;
-    height: 30px;
+    width: 80px; /* Tamanho do quadrado aumentado */
+    height: 80px; /* Tamanho do quadrado aumentado */
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 2px;
     background-color: #fff; /* Fundo branco */
-    cursor: pointer; /* Altera o cursor */
+    cursor: pointer; /* Altera o cursor para indicar interatividade */
     transition: background-color 0.3s ease; /* Efeito de transição suave */
 }
 
+/* Efeito ao passar o mouse sobre os quadrados */
 .player-list li:hover {
-    background-color: #e0e0e0; /* Cor de fundo quando passar o cursor em cima */
+    background-color: #e0e0e0; /* Cor de fundo quando hover */
 }
 
+/* Posicionamento do tabuleiro do Jogador 1 */
 #tabuleiroJogador1 {
     align-self: flex-start;
 }
 
+/* Posicionamento do tabuleiro do Jogador 2 */
 #tabuleiroJogador2 {
     align-self: flex-end;
 }
 
+/* Estilos do botão de rolar o dado */
 #rollDiceBtn {
     margin-top: 20px; /* Espaçamento acima do botão */
     padding: 10px;
@@ -63,6 +72,19 @@ body {
     cursor: pointer;
 }
 
+/* Efeito ao passar o mouse sobre o botão */
 #rollDiceBtn:hover {
     background-color: #45a049; /* Cor de fundo mais escura ao passar o mouse */
+}
+#resultadoDado1,
+#resultadoDado2 {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }

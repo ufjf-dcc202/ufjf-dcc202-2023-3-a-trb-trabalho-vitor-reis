@@ -23,7 +23,7 @@ function rolarDado() {
     const valorDado = Math.floor(Math.random() * 6) + 1;
 
     // Exibe o resultado do dado no elemento HTML
-    const resultadoDadoElement = document.getElementById('resultadoDado');
+    const resultadoDadoElement = jogadorAtual === 1 ? document.getElementById('resultadoDado1') : document.getElementById('resultadoDado2');
     resultadoDadoElement.textContent = `Resultado do Dado: ${valorDado}`;
 
     // Lógica para decidir em qual lista colocar o valor do dado
