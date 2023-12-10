@@ -10,15 +10,28 @@ body {
 .player {
     text-align: center;
 }
-table{
-    border:  1 px;
 
-}
 .game-board {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-top: 10px;
+}
+
+.player-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+}
+
+.player-list li {
+    border: 1px solid;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2px;
 }
 
 #tabuleiroJogador1 {
