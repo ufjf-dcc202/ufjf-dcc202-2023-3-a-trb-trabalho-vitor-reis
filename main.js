@@ -54,6 +54,6 @@ function trocarJogador() {
     if (jogadorAtual === 2) {
         setTimeout(() => {
             rolarDado();
-        }, 1000); // Adicione um atraso opcional (1 segundo) para tornar a rolagem visível
+        }, 1000); 
     }
 }
