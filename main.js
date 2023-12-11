@@ -37,7 +37,7 @@ function handleClique(square) {
         // Atribui o valor do dado ao quadrado clicado
         square.textContent = document.getElementById(`resultadoDado${jogadorAtual}`).textContent.split(' ')[3];
 
-        // Adiciona a classe 'filled' para indicar que o quadrado foi preenchido
+        // Indica que o quadrado foi corrigido
         square.classList.add('filled');
 
         // Troca de jogador
@@ -59,6 +59,27 @@ function removerEventoClique() {
     });
 }
 
+function clicouNoScore(element) {
+    return element.closest('.score') !== null;
+}
+
+function atualizarScoreJogador(jogador) {
+    const listaJogador = jogador === 1 ? listasJogador1 : listasJogador2;
+    const scoreDiv = document.getElementById(`scoreJogador${jogador}`);
+
+    for (let coluna = 0; coluna < 3; coluna++) {
+        let somaColuna = 0;
+
+        // Soma os valores da coluna na lista de jogadores correspondente
+        for (let i = 0; i < 3; i++) {
+            somaColuna += parseInt(listaJogador[coluna].getElementsByTagName('li')[i].textContent, 10) || 0;
+        }
+
+        // Atualiza o valor na div score correspondente ao jogador
+        scoreDiv.getElementsByTagName('li')[coluna].textContent = somaColuna;
+    }
+}
+
 // Função para rolar o dado do jogador 1
 function rolarDadoJogador1() {
     if (jogadorAtual === 2) {
@@ -69,18 +90,21 @@ function rolarDadoJogador1() {
     const valorDado = Math.floor(Math.random() * 6) + 1;
 
     const resultadoDadoElement = document.getElementById(`resultadoDado${jogadorAtual}`);
-    resultadoDadoElement.textContent = `Resultado do Dado: ${valorDado}`;
+    resultadoDadoElement.textContent = `Dado jogador 1: ${valorDado}`;
 
     setTimeout(() => {
         podeClicar = true;
     }, 1000);   
 
     adicionarEventoClique();
+
 }
 
 // Função para trocar de jogador
 function trocarJogador() {
+
     jogadorAtual = jogadorAtual === 1 ? 2 : 1;
+    atualizarScoreJogador(1);
     console.log(jogadorAtual);
 
     // Se o jogador atual for 2, rolar dados automaticamente
@@ -102,7 +126,7 @@ function trocarJogador() {
 
 // Função para rolar o dado do jogador 2
 function rolarDadoJogador2() {
-    if (ehTurnoJogador1()) {
+    if (jogadorAtual === 1) {
         return; // Impede que o jogador 2 role o dado durante o turno do jogador 1
     }
 
@@ -111,7 +135,7 @@ function rolarDadoJogador2() {
 
     // Exibe o resultado do dado no elemento HTML
     const resultadoDadoElement = document.getElementById('resultadoDado2');
-    resultadoDadoElement.textContent = `Resultado do Dado: ${valorDado}`;
+    resultadoDadoElement.textContent = `Dado Jogador 2: ${valorDado}`;
 
     // Lógica para decidir em qual lista colocar o valor do dado (posição aleatória)
     const listaJogador2Aleatoria = listasJogador2[Math.floor(Math.random() * 3)];
@@ -125,7 +149,7 @@ function rolarDadoJogador2() {
             break; // Interrompe o loop após encontrar a primeira célula vazia
         }
     }
-
+    atualizarScoreJogador(2);
 
     trocarJogador();
 }
