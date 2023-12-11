@@ -34,8 +34,8 @@ body {
 /* Estilos para cada item da lista (quadrados) */
 .player-list li {
     border: 1px solid #ccc; /* Borda suave */
-    width: 80px; /* Tamanho do quadrado aumentado */
-    height: 80px; /* Tamanho do quadrado aumentado */
+    width: 60px; /* Tamanho do quadrado aumentado */
+    height: 60px; /* Tamanho do quadrado aumentado */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -79,12 +79,16 @@ body {
 #resultadoDado1,
 #resultadoDado2 {
     position: fixed;
-    bottom: 10px;
-    left: 10px;
     background-color: #fff;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 14px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    left: 10px;
+}
+
+#resultadoDado2 {
+    bottom: 70px; /* Posicionamento do segundo resultado */
 }
