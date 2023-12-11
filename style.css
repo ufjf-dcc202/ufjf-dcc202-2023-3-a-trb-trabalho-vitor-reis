@@ -19,7 +19,6 @@ body {
 /* Estilos do tabuleiro de jogo */
 .game-board {
     display: flex;
-    flex-direction: column;
     align-items: center;
     margin-top: 10px;
 }
@@ -29,6 +28,7 @@ body {
     list-style: none;
     padding: 0;
     display: flex;
+    flex-direction: column;
 }
 
 /* Estilos para cada item da lista (quadrados) */
@@ -44,11 +44,34 @@ body {
     cursor: pointer; /* Altera o cursor para indicar interatividade */
     transition: background-color 0.3s ease; /* Efeito de transição suave */
 }
+.score-list{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+ul{
+    padding: initial;
+}
+.score-list li{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ccc; /* Borda suave */
+    width: 60px; /* Tamanho do quadrado aumentado */
+    height: 60px; /* Tamanho do quadrado aumentado */
+    list-style: none;
+    margin: 2px;
+    background-color: #fff; /* Fundo branco */
+    cursor: pointer; /* Altera o cursor para indicar interatividade */
+    transition: background-color 0.3s ease; /* Efeito de transição suave */
+}
 
 /* Efeito ao passar o mouse sobre os quadrados */
 .player-list li:hover {
     background-color: #e0e0e0; /* Cor de fundo quando hover */
 }
+
+
 
 /* Posicionamento do tabuleiro do Jogador 1 */
 #tabuleiroJogador1 {
