@@ -98,10 +98,13 @@ function rolarDadoJogador1() {
 
     adicionarEventoClique();
 
+    verificarIgualdadeColunasAmbosJogadores();
+
 }
 
 // Função para trocar de jogador
 function trocarJogador() {
+
 
     jogadorAtual = jogadorAtual === 1 ? 2 : 1;
     atualizarScoreJogador(1);
@@ -109,7 +112,7 @@ function trocarJogador() {
 
     // Se o jogador atual for 2, rolar dados automaticamente
     if (jogadorAtual === 2) {
-        setTimeout(() => {
+        
             // Após rolar o dado, impede que o jogador 1 clique
             podeClicar = false;
 
@@ -117,42 +120,67 @@ function trocarJogador() {
             document.querySelectorAll('.player-list li').forEach(square => {
                 square.removeEventListener('click', () => {});
             });
-
-            // Rola o dado do jogador 2
+            
+            
             rolarDadoJogador2();
-        }, 1000);
+        
     }
-}
+    
+    
+    }
+
 
 // Função para rolar o dado do jogador 2
 function rolarDadoJogador2() {
     if (jogadorAtual === 1) {
-        return; // Impede que o jogador 2 role o dado durante o turno do jogador 1
+        return;
     }
 
-    // Lógica para gerar um número aleatório de 1 a 6 (representando o dado)
     const valorDado = Math.floor(Math.random() * 6) + 1;
-
-    // Exibe o resultado do dado no elemento HTML
     const resultadoDadoElement = document.getElementById('resultadoDado2');
     resultadoDadoElement.textContent = `Dado Jogador 2: ${valorDado}`;
 
-    // Lógica para decidir em qual lista colocar o valor do dado (posição aleatória)
-    const listaJogador2Aleatoria = listasJogador2[Math.floor(Math.random() * 3)];
+    const colunaJogador2Aleatoria = Math.floor(Math.random() * 3);
+    const listaJogador2Aleatoria = listasJogador2[colunaJogador2Aleatoria];
     const itensLista = listaJogador2Aleatoria.getElementsByTagName('li');
 
-    // Encontra a primeira célula vazia e atribui o valor do dado
     for (let j = 0; j < 3; j++) {
         if (itensLista[j].textContent === '') {
-            // Atribui o valor do dado à célula vazia
             itensLista[j].textContent = valorDado;
-            break; // Interrompe o loop após encontrar a primeira célula vazia
+            break;
         }
+        
     }
+
     atualizarScoreJogador(2);
+
+    console.log(`Rolou dado para Jogador 2. Coluna escolhida: ${colunaJogador2Aleatoria + 1}`);
+
+    verificarIgualdadeColunasAmbosJogadores();
 
     trocarJogador();
 }
+
+function verificarIgualdadeColunasAmbosJogadores() {
+    for (let linha = 0; linha < 3; linha++) {
+        for (let coluna = 0; coluna < 3; coluna++) {
+            const elementoJogador1 = listasJogador1[coluna].getElementsByTagName('li')[linha].textContent;
+            const elementoJogador2 = listasJogador2[coluna].getElementsByTagName('li')[linha].textContent;
+
+            if (elementoJogador1 === elementoJogador2 && elementoJogador1 !== '') {
+                console.log(`Elemento igual encontrado na linha ${linha + 1}, posição ${coluna + 1} para ambos os jogadores!`);
+                // Faça algo aqui se houver um elemento igual (por exemplo, exibir uma mensagem, etc.)
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
 
 
 
