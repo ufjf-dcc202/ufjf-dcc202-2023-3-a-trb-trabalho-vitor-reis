@@ -1,4 +1,17 @@
 /* Estilos gerais do corpo da página */
+
+@keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
 body {
     display: flex;
     flex-direction: column;
@@ -6,17 +19,16 @@ body {
     justify-content: space-between;
     height: 100vh;
     margin: 0;
-    font-family: 'Arial', sans-serif; /* Fonte padrão para uma aparência limpa */
-    background-color: #f0f0f0; /* Cor de fundo suave */
+    font-family: 'Arial', sans-serif; 
+    background-color: #f0f0f0; 
 }
 
 /* Estilos para cada jogador */
 .player {
     text-align: center;
-    margin-bottom: 20px; /* Espaçamento entre os jogadores */
+    margin-bottom: 20px; 
 }
 
-/* Estilos do tabuleiro de jogo */
 .game-board {
     display: flex;
     align-items: center;
@@ -31,19 +43,26 @@ body {
     flex-direction: column;
 }
 
-/* Estilos para cada item da lista (quadrados) */
+
 .player-list li {
-    border: 1px solid #ccc; /* Borda suave */
+    border: 1px solid #ccc;
     width: 60px; /* Tamanho do quadrado aumentado */
     height: 60px; /* Tamanho do quadrado aumentado */
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 2px;
-    background-color: #fff; /* Fundo branco */
+    background-color: #fff; 
     cursor: pointer; /* Altera o cursor para indicar interatividade */
     transition: background-color 0.3s ease; /* Efeito de transição suave */
 }
+.player-list.selected {
+    border: 3px solid red;
+}
+.player-list.selected li {
+    animation: pulse 1s infinite; 
+  }
+
 .score-list{
     display: flex;
     align-items: center;
@@ -56,19 +75,14 @@ ul{
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #ccc; /* Borda suave */
+    border: 1px solid #ccc; 
     width: 60px; /* Tamanho do quadrado aumentado */
     height: 60px; /* Tamanho do quadrado aumentado */
     list-style: none;
     margin: 2px;
-    background-color: #fff; /* Fundo branco */
-    cursor: pointer; /* Altera o cursor para indicar interatividade */
+    background-color: #fff; 
+    cursor: pointer;
     transition: background-color 0.3s ease; /* Efeito de transição suave */
-}
-
-/* Efeito ao passar o mouse sobre os quadrados */
-.player-list li:hover {
-    background-color: #e0e0e0; /* Cor de fundo quando hover */
 }
 
 
@@ -85,11 +99,11 @@ ul{
 
 /* Estilos do botão de rolar o dado */
 #btnRolarDado {
-    margin-top: auto; /* Define a margem superior automática para centralizar verticalmente */
-    margin-bottom: 60px; /* Distância de 30px do extremo inferior da página */
+    margin-top: auto; 
+    margin-bottom: 60px; 
     padding: 10px;
     font-size: 16px;
-    background-color: #4CAF50; /* Cor de fundo verde */
+    background-color: #4CAF50; 
     color: white;
     border: none;
     border-radius: 4px;
@@ -98,7 +112,7 @@ ul{
 
 /* Efeito ao passar o mouse sobre o botão */
 #btnRolarDado:hover {
-    background-color: #45a049; /* Cor de fundo mais escura ao passar o mouse */
+    background-color: #45a049; 
 }
 #resultadoDado1,
 #resultadoDado2 {
