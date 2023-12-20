@@ -169,7 +169,7 @@ function verificarIgualdadeColunasAmbosJogadores() {
 
             if (elementoJogador1 === elementoJogador2 && elementoJogador1 !== '') {
                 console.log(`Elemento igual encontrado na linha ${linha + 1}, posição ${coluna + 1} para ambos os jogadores!`);
-                // Faça algo aqui se houver um elemento igual (por exemplo, exibir uma mensagem, etc.)
+                
             }
         }
     }
